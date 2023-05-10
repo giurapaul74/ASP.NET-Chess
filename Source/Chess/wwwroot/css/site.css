@@ -20,3 +20,75 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.chessboard {
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.chess-cell {
+    width: 50px; /* This assumes that the chessboard is 100% of its parent's width. */
+    height: 50px; /* This assumes that the chessboard is square. */
+    border: 1px solid black;
+    box-sizing: border-box; /* This ensures that the border is included in the cell's dimensions. */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.light-square {
+    background-color: white;
+}
+
+.dark-square {
+    background-color: gray;
+}
+
+.white-pawn::before{
+    content: url("/Images/white_pawn.png")
+}
+
+.white-rook::before{
+    content: url(/Images/white_rook.png)
+}
+
+.white-knight::before{
+    content: url(/Images/white_knight.png)
+}
+
+.white-bishop::before{
+    content: url(/Images/white_bishop.png)
+}
+
+.white-queen::before{
+    content: url(/Images/white_queen.png)
+}
+
+.white-king::before{
+    content: url(/Images/white_king.png)
+
+}.black-pawn::before{
+    content: url("/Images/black_pawn.png")
+}
+
+.black-rook::before{
+    content: url(/Images/black_rook.png)
+}
+
+.black-knight::before{
+    content: url(/Images/black_knight.png)
+}
+
+.black-bishop::before{
+    content: url(/Images/black_bishop.png)
+}
+
+.black-queen::before{
+    content: url(/Images/black_queen.png)
+}
+
+.black-king::before{
+    content: url(/Images/black_king.png)
+}

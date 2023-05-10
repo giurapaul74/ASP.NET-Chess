@@ -1,4 +1,5 @@
-﻿using Chess.Models;
+﻿using Chess.Board;
+using Chess.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,7 +16,9 @@ namespace Chess.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ChessBoard chessBoard = new ChessBoard();
+            chessBoard.InitializeBoard();
+            return View(chessBoard);
         }
 
         public IActionResult Privacy()

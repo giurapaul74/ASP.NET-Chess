@@ -1,0 +1,27 @@
+﻿@using Chess.Board;
+@using Chess.ChessPieces;
+@model Chess.Board.ChessBoard
+
+@{
+    ChessBoard chessBoard = (ChessBoard)Model;
+}
+
+<table class="chessboard">
+    @for (int y = 7; y >= 0; y--)
+    {
+        <tr>
+            @for (int x = 0; x < 8; x++)
+            {
+                <td class="chess-cell @(x % 2 == y % 2 ? "light-square" : "dark-square")" link="_Layout.cshtml.css">
+                    @{
+                        ChessPiece piece = Model.Board[x, y];
+                        //string pieceClass = piece != null ? $"{piece.Color}-{piece.Type}" : "";
+                         string pieceImage = piece != null ? $"url(~/Images/{piece.Color}_{piece.Type}.png)" : "";
+                         string pieceClass = piece != null ? $"{piece.Color}-{piece.Type}" : "";
+                    }
+                    <div class="chess-piece @pieceClass" style="background-image: @pieceImage"></div>
+                </td>
+            }
+        </tr>
+    }
+</table>

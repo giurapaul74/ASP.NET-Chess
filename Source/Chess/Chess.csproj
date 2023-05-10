@@ -6,4 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\black_bishop.png" />
+    <None Include="wwwroot\Images\black_king.png" />
+    <None Include="wwwroot\Images\black_knight.png" />
+    <None Include="wwwroot\Images\black_pawn.png" />
+    <None Include="wwwroot\Images\black_queen.png" />
+    <None Include="wwwroot\Images\black_rook.png" />
+    <None Include="wwwroot\Images\white_bishop.png" />
+    <None Include="wwwroot\Images\white_king.png" />
+    <None Include="wwwroot\Images\white_knight.png" />
+    <None Include="wwwroot\Images\white_pawn.png" />
+    <None Include="wwwroot\Images\white_queen.png" />
+    <None Include="wwwroot\Images\white_rook.png" />
+  </ItemGroup>
+
 </Project>

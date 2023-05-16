@@ -2,16 +2,21 @@
 
 namespace Chess.ChessPieces
 {
-    public class Bishop : ChessPiece
+    public class Bishop/* : ChessPiece*/
     {
-        public Bishop(string color, string type) : base(color, type)
+        public Bishop(int initialX, int initialY, string color, string type) /*: base(initialX, initialY, color, type)*/
         {
 
         }
 
-        public override List<Tuple<int, int>> GetPossibleMoves(int x, int y, ChessBoard board)
-        {
-            throw new NotImplementedException();
-        }
+        //public override bool CanMoveTo(int newX, int newY)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public override List<Tuple<int, int>> GetPossibleMoves(int x, int y, ChessBoard board)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -17,30 +17,9 @@ namespace Chess.Board
 
             for (int i = 0; i < 8; i++)
             {
-                Board[i, 1] = new Pawn("black", "pawn");
-                Board[i, 6] = new Pawn("white", "pawn");
+                Board[i, 1] = new Pawn(i, 1, "white", "pawn");
+                Board[i, 6] = new Pawn(i, 6, "black", "pawn");
             }
-
-            Board[0, 0] = new Rook("black", "rook");
-            Board[7, 0] = new Rook("black", "rook");
-            Board[0, 7] = new Rook("white", "rook");
-            Board[7, 7] = new Rook("white", "rook");
-
-            Board[1, 0] = new Knight("black", "knight");
-            Board[6, 0] = new Knight("black", "knight");
-            Board[1, 7] = new Knight("white", "knight");
-            Board[6, 7] = new Knight("white", "knight");
-
-            Board[2, 0] = new Bishop("black", "bishop");
-            Board[5, 0] = new Bishop("black", "bishop");
-            Board[2, 7] = new Bishop("white", "bishop");
-            Board[5, 7] = new Bishop("white", "bishop");
-
-            Board[3, 0] = new Queen("black", "queen");
-            Board[3, 7] = new Queen("white", "queen");
-
-            Board[4, 0] = new King("black", "king");
-            Board[4, 7] = new King("white", "king");
         }
 
         public bool IsValidMove(int startX, int startY, int endX, int endY)
@@ -149,6 +128,46 @@ namespace Chess.Board
             }
 
             return true;
+        }
+
+        public bool MovePiece(int currentX, int currentY, int newX, int newY)
+        {
+            ChessPiece pieceToMove = Board[currentX, currentY];
+
+            if (pieceToMove == null)
+            {
+                return false;
+            }
+
+            if (pieceToMove.CanMoveTo(newX, newY, this))
+            {
+                Board[newX, newY] = pieceToMove;
+                Board[currentX, currentY] = null;
+
+                pieceToMove.MoveTo(newX, newY);
+                pieceToMove.HasMoved = true;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsValidPosition(int x, int y)
+        {
+            if (x >= 0 && x < 8 && y >= 0 && y < 8)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsEmpty(int x, int y)
+        {
+            return Board[x, y] == null;
         }
     }
 }

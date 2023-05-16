@@ -47,7 +47,7 @@ body {
 }
 
 .white-pawn::before{
-    content: url("/Images/white_pawn.png")
+    content: url("../Images/white_pawn.png")
 }
 
 .white-rook::before{
@@ -70,7 +70,7 @@ body {
     content: url(/Images/white_king.png)
 
 }.black-pawn::before{
-    content: url("/Images/black_pawn.png")
+    content: url("../Images/black_pawn.png")
 }
 
 .black-rook::before{
@@ -91,4 +91,8 @@ body {
 
 .black-king::before{
     content: url(/Images/black_king.png)
+}
+
+.highlight{
+    background-color: yellow 
 }

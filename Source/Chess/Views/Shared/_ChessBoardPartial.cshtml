@@ -12,16 +12,73 @@
         <tr>
             @for (int x = 0; x < 8; x++)
             {
-                <td class="chess-cell @(x % 2 == y % 2 ? "light-square" : "dark-square")" link="_Layout.cshtml.css">
+                <td class="chess-cell @(x % 2 == y % 2 ? "light-square" : "dark-square")" data-x="@x" data-y="@y">
                     @{
                         ChessPiece piece = Model.Board[x, y];
-                        //string pieceClass = piece != null ? $"{piece.Color}-{piece.Type}" : "";
                          string pieceImage = piece != null ? $"url(~/Images/{piece.Color}_{piece.Type}.png)" : "";
                          string pieceClass = piece != null ? $"{piece.Color}-{piece.Type}" : "";
                     }
-                    <div class="chess-piece @pieceClass" style="background-image: @pieceImage"></div>
+                    <div class="chess-piece @pieceClass" data-x="@x" data-y="@y" onclick="selectPiece(this)" style="background-image: @pieceImage"></div>
                 </td>
             }
         </tr>
     }
 </table>
+
+<script>
+    function selectPiece(pieceElement) {
+        // Get the current position of the chess piece
+        var currentX = pieceElement.dataset.x;
+        var currentY = pieceElement.dataset.y;
+
+        // Remove any existing highlights
+        var cells = document.querySelectorAll(".chess-cell");
+        cells.forEach(function (cell) {
+            cell.classList.remove('highlight');
+        });
+
+        // Send a request to get the possible moves
+        fetch(`/Home/GetPossibleMoves?x=${currentX}&y=${currentY}`)
+            .then(response => response.json())
+            .then(data => {
+                // Highlight the possible moves
+                data.forEach(function (position) {
+                    var x = position.item1;
+                    var y = position.item2;
+                    var cell = document.querySelector(`.chess-cell[data-x="${x}"][data-y="${y}"]`);
+                    cell.classList.add('highlight');
+
+                    // Attach a click event to this cell
+                    cell.onclick = function () {
+                        // Send a request to the server-side method
+                        fetch(`/Home/MakeMove?startX=${currentX}&startY=${currentY}&endX=${x}&endY=${y}`)
+                            .then(response => {
+                                console.log(response);
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log(data);
+                                // If the move was successful, update the client-side state of the board
+                                if (data.success) {
+                                    // Remove the piece from its current position
+                                    var piece = document.querySelector(`.chess-piece[data-x="${currentX}"][data-y="${currentY}"]`);
+                                    piece.remove();
+
+                                    // Add the piece to its new position
+                                    var pieceImage = piece.style.backgroundImage;
+                                    var newPiece = document.createElement('div');
+                                    newPiece.className = 'chess-piece';
+                                    newPiece.style.backgroundImage = pieceImage;
+                                    newPiece.dataset.x = x;
+                                    newPiece.dataset.y = y;
+                                    cell.appendChild(newPiece);
+
+                                    // Refresh the page to get the new state of the board
+                                    location.reload();
+                                }
+                            });
+                    };
+                });
+            });
+    }
+</script>

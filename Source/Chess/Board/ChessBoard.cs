@@ -20,6 +20,32 @@ namespace Chess.Board
                 Board[i, 1] = new Pawn(i, 1, "white", "pawn");
                 Board[i, 6] = new Pawn(i, 6, "black", "pawn");
             }
+
+            // Initialize rooks
+            Board[0, 0] = new Rook(0, 0, "white", "rook");
+            Board[7, 0] = new Rook(7, 0, "white", "rook");
+            Board[0, 7] = new Rook(0, 7, "black", "rook");
+            Board[7, 7] = new Rook(7, 7, "black", "rook");
+
+            // Initialize knights
+            Board[1, 0] = new Knight(1, 0, "white", "knight");
+            Board[6, 0] = new Knight(6, 0, "white", "knight");
+            Board[1, 7] = new Knight(1, 7, "black", "knight");
+            Board[6, 7] = new Knight(6, 7, "black", "knight");
+
+            // Initialize bishops
+            Board[2, 0] = new Bishop(2, 0, "white", "bishop");
+            Board[5, 0] = new Bishop(5, 0, "white", "bishop");
+            Board[2, 7] = new Bishop(2, 7, "black", "bishop");
+            Board[5, 7] = new Bishop(5, 7, "black", "bishop");
+
+            // Initialize queens
+            Board[3, 0] = new Queen(3, 0, "white", "queen");
+            Board[3, 7] = new Queen(3, 7, "black", "queen");
+
+            // Initialize kings
+            Board[4, 0] = new King(4, 0, "white", "king");
+            Board[4, 7] = new King(4, 7, "black", "king");
         }
 
         public bool IsValidMove(int startX, int startY, int endX, int endY)

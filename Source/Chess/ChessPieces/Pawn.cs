@@ -31,17 +31,6 @@ namespace Chess.ChessPieces
                 }
             }
 
-            // If the pawn is moving diagonally forward one space to capture an opponent's piece...
-            if (Math.Abs(deltaX) == 1 && Math.Abs(deltaY) == 1 && chessBoard.Board[newX, newY] != null)
-            {
-                // ...and the piece at the new position is an opponent's piece...
-                if (chessBoard.Board[newX, newY].Color != Color)
-                {
-                    // ...the move is legal
-                    return true;
-                }
-            }
-
             // If none of the above conditions are met, the move is illegal
             return false;
         }
